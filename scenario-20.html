@@ -381,7 +381,7 @@ document.getElementById('hdrBadge').textContent='設施異常';
 
 var carouselPage={'20':0};
 function carouselNav(id,dir){var pages=document.querySelectorAll('#carousel'+id+' .carousel-page');var cur=(carouselPage[id]||0)+dir;cur=Math.max(0,Math.min(pages.length-1,cur));carouselGoTo(id,cur);}
-function carouselGoTo(id,idx){var pages=document.querySelectorAll('#carousel'+id+' .carousel-page');var dots=document.querySelectorAll('#'+id+'dots .c-dot');for(var i=0;i<pages.length;i++)pages[i].classList.toggle('active',i===idx);for(var i=0;i<dots.length;i++)dots[i].classList.toggle('active',i===idx);document.getElementById(id+'pgNum').textContent=(idx+1)+' / '+pages.length;document.getElementById(id+'prev').disabled=idx===0;document.getElementById(id+'next').disabled=idx===pages.length-1;carouselPage[id]=idx;}
+function carouselGoTo(id,idx){var pages=document.querySelectorAll('#carousel'+id+' .carousel-page');var dots=document.querySelectorAll('#c'+id+'dots .c-dot');for(var i=0;i<pages.length;i++)pages[i].classList.toggle('active',i===idx);for(var i=0;i<dots.length;i++)dots[i].classList.toggle('active',i===idx);document.getElementById('c'+id+'pgNum').textContent=(idx+1)+' / '+pages.length;document.getElementById('c'+id+'prev').disabled=idx===0;document.getElementById('c'+id+'next').disabled=idx===pages.length-1;carouselPage[id]=idx;}
 
 function goToScenario(id){if(id===SCENARIO_ID){toggleSB();return;}sessionStorage.setItem('testerName',testerName);window.location.href='scenario-'+id+'.html';}
 function goHome(){window.location.href='index.html';}
