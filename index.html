@@ -305,57 +305,42 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 </style>
 </head>
 <body>
-<!-- COVER -->
 <div id="coverPage" style="position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center">
-  <div class="cover-inner">
-    <div class="cover-eyebrow"><span class="live-dot"></span>LinkerVision · AI Training</div>
-    <div class="cover-title">Observe<span>準確度</span>測驗</div>
-    <div class="cover-subtitle">選擇情境，開始標注訓練，即時檢驗 AI 辨識準確率</div>
-    <div class="cover-card">
-      <div class="cover-label">受試者姓名</div>
-      <input class="cover-input" id="testerNameInput" type="text" placeholder="請輸入您的姓名（必填）" oninput="onCoverInput()">
-      <div class="cover-label">選擇測驗情境</div>
-      <select class="cover-select" id="coverSelect" onchange="onCoverInput()">
-        <option value="">— 請選擇情境 —</option>
-        <option value="01">情境 01 ｜ 即時車輛交通事故辨識</option>
-        <option value="03">情境 03 ｜ 交通違規辨識</option>
-        <option value="" disabled>情境 04（即將推出）</option>
-        <option value="" disabled>情境 05（即將推出）</option>
-        <option value="" disabled>情境 06（即將推出）</option>
-        <option value="" disabled>情境 09（即將推出）</option>
-        <option value="" disabled>情境 16（即將推出）</option>
-        <option value="20">情境 20 ｜ 道路標線模糊辨識</option>
-        <option value="" disabled>情境 29（即將推出）</option>
-        <option value="" disabled>情境 30（即將推出）</option>
-        <option value="" disabled>情境 80（即將推出）</option>
-        <option value="" disabled>情境 81（即將推出）</option>
-        <option value="" disabled>情境 109（即將推出）</option>
-      </select>
-      <button class="cover-btn" id="coverBtn" onclick="validateAndEnter()" disabled>開始測驗 →</button>
-    </div>
-    <div class="cover-stats">
-      <div class="cover-stat"><div class="num">3</div><div class="lbl">可用情境</div></div>
-      <div class="cover-stat"><div class="num">129</div><div class="lbl">測驗圖片</div></div>
-      <div class="cover-stat"><div class="num">3</div><div class="lbl">標注類別</div></div>
-    </div>
+<div class="cover-inner">
+  <div class="cover-eyebrow"><span class="live-dot"></span>LinkerVision · AI Training</div>
+  <div class="cover-title">Observe<span>準確度</span>測驗</div>
+  <div class="cover-subtitle">選擇情境，開始標注訓練，即時檢驗 AI 辨識準確率</div>
+  <div class="cover-card">
+    <div class="cover-label">受試者姓名</div>
+    <input class="cover-input" id="nameInput" type="text" placeholder="請輸入您的姓名（必填）" oninput="onInput()">
+    <div class="cover-label">選擇測驗情境</div>
+    <select class="cover-select" id="scSelect" onchange="onInput()">
+      <option value="">— 請選擇情境 —</option>
+      <option value="01">情境 01 ｜ 即時車輛交通事故辨識</option>
+      <option value="03">情境 03 ｜ 交通違規辨識</option>
+      <option value="" disabled>情境 04（即將推出）</option>
+      <option value="" disabled>情境 05（即將推出）</option>
+      <option value="" disabled>情境 06（即將推出）</option>
+      <option value="" disabled>情境 09（即將推出）</option>
+      <option value="" disabled>情境 16（即將推出）</option>
+      <option value="20">情境 20 ｜ 道路標線模糊辨識</option>
+      <option value="" disabled>情境 29（即將推出）</option>
+      <option value="" disabled>情境 30（即將推出）</option>
+      <option value="" disabled>情境 80（即將推出）</option>
+      <option value="" disabled>情境 81（即將推出）</option>
+      <option value="" disabled>情境 109（即將推出）</option>
+    </select>
+    <button class="cover-btn" id="startBtn" onclick="go()" disabled>開始測驗 →</button>
+  </div>
+  <div class="cover-stats">
+    <div class="cover-stat"><div class="num">3</div><div class="lbl">可用情境</div></div>
+    <div class="cover-stat"><div class="num">129</div><div class="lbl">測驗圖片</div></div>
+    <div class="cover-stat"><div class="num">3</div><div class="lbl">標注類別</div></div>
   </div>
 </div>
+</div>
 <script>
-function onCoverInput(){
-  const name=document.getElementById('testerNameInput').value.trim();
-  const sc=document.getElementById('coverSelect').value;
-  document.getElementById('coverBtn').disabled=!(name&&sc);
-}
-function validateAndEnter(){
-  const name=document.getElementById('testerNameInput').value.trim();
-  const v=document.getElementById('coverSelect').value;
-  if(!name){const inp=document.getElementById('testerNameInput');inp.classList.add('err');inp.focus();setTimeout(()=>inp.classList.remove('err'),400);return;}
-  if(!v) return;
-  sessionStorage.setItem('testerName', name);
-  window.location.href = 'scenario-' + v + '.html';
-}
-document.addEventListener('keydown', e=>{
-  if(e.key==='Enter' && !document.getElementById('coverBtn').disabled) validateAndEnter();
-});
-</script>
-</body></html>
+function onInput(){document.getElementById('startBtn').disabled=!(document.getElementById('nameInput').value.trim()&&document.getElementById('scSelect').value);}
+function go(){var n=document.getElementById('nameInput').value.trim(),v=document.getElementById('scSelect').value;if(!n){var i=document.getElementById('nameInput');i.classList.add('err');i.focus();setTimeout(function(){i.classList.remove('err');},400);return;}if(!v)return;sessionStorage.setItem('testerName',n);window.location.href='scenario-'+v+'.html';}
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&!document.getElementById('startBtn').disabled)go();});
+</script></body></html>
