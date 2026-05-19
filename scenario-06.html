@@ -531,7 +531,7 @@ const QUIZ_IMGS=[{"label":"Confirmed","name":"2026-04-30_13-28-35_KKA-9178-C_278
 QUIZ_IMGS.forEach(img=>{img.src=SCENARIO_ID+'/'+encodeURIComponent(img.label)+'/'+encodeURIComponent(img.name);});
 var carouselPage={'06':0};
 function carouselNav(id,dir){var pages=document.querySelectorAll('#carousel'+id+' .carousel-page');var cur=(carouselPage[id]||0)+dir;cur=Math.max(0,Math.min(pages.length-1,cur));carouselGoTo(id,cur);}
-function carouselGoTo(id,idx){var pages=document.querySelectorAll('#carousel'+id+' .carousel-page');var dots=document.querySelectorAll('#'+id+'dots .c-dot');pages.forEach(function(p,i){p.classList.toggle('active',i===idx);});dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});carouselPage[id]=idx;var prev=document.getElementById(id+'prev'),next=document.getElementById(id+'next'),pg=document.getElementById(id+'pgNum');if(prev)prev.disabled=idx===0;if(next)next.disabled=idx===pages.length-1;if(pg)pg.textContent=(idx+1)+' / '+pages.length;}
+function carouselGoTo(id,idx){var pages=document.querySelectorAll('#carousel'+id+' .carousel-page');var dots=document.querySelectorAll('#c'+id+'dots .c-dot');pages.forEach(function(p,i){p.classList.toggle('active',i===idx);});dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});carouselPage[id]=idx;var prev=document.getElementById('c'+id+'prev'),next=document.getElementById('c'+id+'next'),pg=document.getElementById('c'+id+'pgNum');if(prev)prev.disabled=idx===0;if(next)next.disabled=idx===pages.length-1;if(pg)pg.textContent=(idx+1)+' / '+pages.length;}
 
 
 let shuffled=[],current=0,score=0,answers=[],answered=false;
