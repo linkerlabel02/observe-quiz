@@ -352,7 +352,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     <button class="home-btn" onclick="goHome()">⌂ 返回封面</button>
   </div>
 </div></div></div></div><div id="pwModal"><div class="pw-card"><div class="pw-icon">🔐</div><div class="pw-title">管理員驗證</div><div class="pw-sub">請輸入密碼以進入資料匯出頁面</div><input class="pw-input" id="pwInput" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')verifyPassword()"><div class="pw-err" id="pwErr"></div><button class="pw-confirm" onclick="verifyPassword()">確認進入</button><br><button class="pw-cancel" onclick="closeAdminModal()">取消</button></div></div>
-<div id="adminPage"><div class="admin-hdr"><span class="hdr-logo">LinkerVision</span><span class="hdr-div" style="width:1px;height:22px;background:#2a4a64"></span><h2>📊 資料匯出</h2><span class="admin-hdr-sp"></span><button class="admin-back" onclick="closeAdminPage()">⌂ 返回測驗</button></div>
+<div id="adminPage"><div class="admin-hdr"><span class="hdr-logo">LinkerVision</span><span class="hdr-div" style="width:1px;height:22px;background:#2a4a64"></span><h2>📊 資料匯出</h2><span class="admin-hdr-sp"></span><button class="admin-back" onclick="loadAdminData()" style="margin-right:8px">🔄 重新載入</button><button class="admin-back" onclick="closeAdminPage()">⌂ 返回測驗</button></div>
 <div class="admin-body"><div class="filter-card"><h3>篩選條件</h3><div class="filter-row">
 <div class="filter-group"><label>開始日期</label><input class="filter-input" type="date" id="fDateFrom"></div>
 <div class="filter-group"><label>結束日期</label><input class="filter-input" type="date" id="fDateTo"></div>
