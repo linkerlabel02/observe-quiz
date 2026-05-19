@@ -546,6 +546,8 @@ window.addEventListener('DOMContentLoaded',function(){
   if(testerName)document.getElementById('nameInput').value=testerName;
   document.getElementById('scenSelect').value='27';
   checkReady();
+  // 從其他情境跳轉過來時，直接略過封面頁
+  if(testerName) startApp();
 });
 
 // ── SIDEBAR ──
