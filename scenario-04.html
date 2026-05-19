@@ -611,7 +611,7 @@ function showResults(){
 function saveResult(name,scenarioId,correct,total,passed){
   const result={id:Date.now(),name:name,scenario_id:scenarioId,scenario_name:SCENARIO_NAMES[scenarioId]||scenarioId,test_date:new Date().toLocaleString('sv-SE',{timeZone:'Asia/Taipei'}),score:Math.round(correct/total*1000)/1000,total_questions:total,correct_count:correct,passed:passed};
   saveResultLocal(result);
-  fetch(GS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)}).catch(()=>{});
+  fetch(GS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)}).catch(function(e){console.warn('Google Sheets 失敗:',e);});
 }
 function saveResultLocal(r){try{const k='observeResults';const arr=JSON.parse(localStorage.getItem(k)||'[]');arr.push(r);localStorage.setItem(k,JSON.stringify(arr));}catch(e){}}
 
