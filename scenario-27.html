@@ -419,7 +419,6 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
           <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled>← 上一張</button>
           <button class="nav-btn" id="nextBtn" onclick="navigate(1)" disabled>下一張 →</button>
         </div>
-        <select class="ans-select" id="imgJump" onchange="jumpTo(this.value)" style="margin-top:10px"></select>
       </div>
       <div>
         <div class="panel-label">作答</div>
@@ -567,7 +566,6 @@ var shuffled=[],answers=[],current=0,score=0,answered=false;
 var zoomScale=1,panX=0,panY=0,isDragging=false,lastX=0,lastY=0;
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function startQuiz(){shuffled=shuffle(QUIZ_IMGS);answers=new Array(shuffled.length).fill(null);current=0;score=0;answered=false;document.getElementById('startScreen').style.display='none';document.getElementById('quizBody').style.display='flex';loadQ(0);}
-function buildJumpMenu(){var sel=document.getElementById('imgJump');sel.innerHTML='';shuffled.forEach(function(img,i){var o=document.createElement('option');o.value=i;o.textContent=(i+1)+'. '+(answers[i]?'✓ ':'')+img.name.slice(-20);sel.appendChild(o);});sel.value=current;}
 function loadQ(idx){
   answered=answers[idx]!==null;
   var img=shuffled[idx];
@@ -594,7 +592,6 @@ function loadQ(idx){
   var total=shuffled.length;
   document.getElementById('scoreChip').textContent=score+' / '+done;
   document.getElementById('progFill').style.width=(done/total*100)+'%';
-  buildJumpMenu();
 }
 function onSelectChange(){
   var sel=document.getElementById('ansSelect');
@@ -626,7 +623,6 @@ function confirmAns(){
   var done=answers.filter(function(a){return a!==null;}).length;
   document.getElementById('scoreChip').textContent=score+' / '+done;
   document.getElementById('progFill').style.width=(done/shuffled.length*100)+'%';
-  buildJumpMenu();
   if(done===shuffled.length){setTimeout(showResults,600);}
 }
 function navigate(dir){
@@ -636,7 +632,6 @@ function navigate(dir){
   answered=answers[current]!==null;
   loadQ(current);
 }
-function jumpTo(idx){current=parseInt(idx);answered=answers[current]!==null;loadQ(current);}
 function showResults(){
   document.getElementById('quizBody').style.display='none';
   var rs=document.getElementById('resultsScreen');
@@ -771,4 +766,4 @@ function exportXLSX(){
 }
 </script>
 </body>
-</html>
+</html>                                                                                                                
