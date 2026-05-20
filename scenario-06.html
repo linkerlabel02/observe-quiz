@@ -504,7 +504,6 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     <div class="export-row">
       <span class="export-lbl">匯出：</span>
       <button class="exp-btn exp-csv" onclick="exportCSV()">↓ CSV</button>
-      <button class="exp-btn exp-xlsx" onclick="exportXLSX()">↓ Excel</button>
       <span class="result-count" id="resultCount"></span>
     </div>
     <div class="table-card">
@@ -723,9 +722,6 @@ function exportCSV(){
   const from=document.getElementById('fDateFrom').value,to=document.getElementById('fDateTo').value;
   a.download='observe_results_'+from+'_'+to+'.csv';a.click();URL.revokeObjectURL(url);
 }
-function exportXLSX(){
-  const rows=[['姓名','情境','測驗日期','總題數','答對題數','正確率','是否通過']];
-  for(let i=0;i<filteredResults.length;i++){const r=filteredResults[i];rows.push([r.name,'情境'+r.scenario_id+'—'+(SCENARIO_NAMES[r.scenario_id]||''),(r.test_date||'').replace('T',' ').slice(0,16),r.total_questions,r.correct_count,Math.round((r.score||0)*100)+'%',r.passed?'通過':'未通過']);}
   let xml='<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="結果"><Table>';
   rows.forEach(r=>{xml+='<Row>'+r.map(c=>'<Cell><Data ss:Type="String">'+String(c).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</Data></Cell>').join('')+'</Row>';});
   xml+='</Table></Worksheet></Workbook>';

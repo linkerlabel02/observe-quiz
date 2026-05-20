@@ -402,7 +402,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 <div class="filter-group"><label>結果</label><select class="filter-input" id="fPass"><option value="">全部</option><option value="pass">通過（≥90%）</option><option value="fail">未通過</option></select></div>
 <button class="filter-btn" onclick="applyFilters()">🔍 套用篩選</button><button class="filter-reset" onclick="resetFilters()">重設</button>
 </div></div>
-<div class="export-row"><span class="export-lbl">匯出：</span><button class="exp-btn exp-csv" onclick="exportCSV()">⬇ CSV</button><button class="exp-btn exp-xlsx" onclick="exportExcel()">⬇ Excel</button><span class="result-count" id="resultCount">共 0 筆</span></div>
+<div class="export-row"><span class="export-lbl">匯出：</span><button class="exp-btn exp-csv" onclick="exportCSV()">⬇ CSV</button><span class="result-count" id="resultCount">共 0 筆</span></div>
 <div class="table-card"><table class="rtable" id="resultTable"><thead><tr><th>#</th><th>姓名</th><th>情境</th><th>測驗日期</th><th>總題數</th><th>答對</th><th>正確率</th><th>結果</th></tr></thead><tbody id="resultTbody"><tr><td colspan="8"><div class="empty-state"><div class="ei">📋</div>尚無資料</div></td></tr></tbody></table></div>
 </div></div><script>
 const SCENARIO_ID='01';

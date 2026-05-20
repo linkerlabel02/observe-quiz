@@ -499,7 +499,6 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
     <div class="export-row">
       <span class="export-lbl">匯出：</span>
       <button class="exp-btn exp-csv" onclick="exportCSV()">↓ CSV</button>
-      <button class="exp-btn exp-xlsx" onclick="exportXLSX()">↓ Excel</button>
       <span class="result-count" id="resultCount"></span>
     </div>
     <div class="table-card">
@@ -764,9 +763,6 @@ function exportCSV(){
   var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
   var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='observe_results.csv';a.click();
 }
-function exportXLSX(){
-  var rows=[['姓名','情境','測驗日期','總題數','答對題數','正確率','是否通過']];
-  for(var i=0;i<filteredResults.length;i++){var r=filteredResults[i];rows.push([r.name,'情境'+r.scenario_id+'—'+(SCENARIO_NAMES[r.scenario_id]||''),(r.test_date||'').replace('T',' ').slice(0,16),r.total_questions,r.correct_count,Math.round((r.score||0)*100)+'%',r.passed?'通過':'未通過']);}
   var header=rows[0],data=rows.slice(1);
   var ws='<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="結果"><Table>';
   ws+='<Row>'+header.map(function(h){return '<Cell><Data ss:Type="String">'+h+'</Data></Cell>';}).join('')+'</Row>';
