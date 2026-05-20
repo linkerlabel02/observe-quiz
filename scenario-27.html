@@ -558,11 +558,15 @@ function startApp(){
   document.getElementById('startTitle').textContent='歡迎，'+n+'！';
 }
 window.addEventListener('DOMContentLoaded',function(){
-  if(testerName)document.getElementById('nameInput').value=testerName;
-  document.getElementById('scenSelect').value='27';
-  checkReady();
-  // 從其他情境跳轉過來時，直接略過封面頁
-  if(testerName) startApp();
+  // 有姓名直接進測驗，沒有就回 index 輸入
+  if(testerName){
+    document.getElementById('nameInput').value=testerName;
+    document.getElementById('scenSelect').value='27';
+    checkReady();
+    startApp();
+  } else {
+    window.location.href='index.html';
+  }
 });
 
 // ── SIDEBAR ──
