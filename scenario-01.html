@@ -493,7 +493,7 @@ const STORAGE_KEY='observe_quiz_results';
 function getStoredResults(){return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}
 function saveResultLocal(r){const a=getStoredResults();a.push(r);localStorage.setItem(STORAGE_KEY,JSON.stringify(a));}
 function saveResult(name,scenarioId,correct,total,passed){
-  const result={id:Date.now(),name:name,scenario_id:scenarioId,scenario_name:SCENARIO_NAMES[scenarioId]||scenarioId,test_date:(function(){var n=new Date(),t=new Date(n.getTime()+(8*60-n.getTimezoneOffset())*60000);return t.toISOString().slice(0,19).replace('T',' ');})(),score:Math.round(correct/total*1000)/1000,total_questions:total,correct_count:correct,passed:passed};
+  const result={id:Date.now(),name:name,scenario_id:scenarioId,scenario_name:SCENARIO_NAMES[scenarioId]||scenarioId,test_date:(function(){var n=new Date(),t=new Date(n.getTime()+8*3600000);return t.toISOString().slice(0,19).replace('T',' ');})(),score:Math.round(correct/total*1000)/1000,total_questions:total,correct_count:correct,passed:passed};
   saveResultLocal(result);
   fetch('https://script.google.com/macros/s/AKfycbwCI4Aasygn4JFgWuus46mKTyDfw2HAOchVRwlPg2d95t03izvhDlzYUhQxPjUr5EjP/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)}).catch(function(e){console.warn('Google Sheets 失敗:',e);});
 }

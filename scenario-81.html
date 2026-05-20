@@ -493,7 +493,7 @@ document.addEventListener('keydown',function(e){
 });
 function saveResult(name,scenId,correct,total,passed){
   var result={id:Date.now(),name:name,scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,
-    test_date:(function(){var n=new Date(),t=new Date(n.getTime()+(8*60-n.getTimezoneOffset())*60000);return t.toISOString().slice(0,19).replace('T',' ');}()),
+    test_date:(function(){var n=new Date(),t=new Date(n.getTime()+8*3600000);return t.toISOString().slice(0,19).replace('T',' ');}()),
     score:Math.round(correct/total*1000)/1000,total_questions:total,correct_count:correct,passed:passed};
   var stored=JSON.parse(localStorage.getItem('quizResults')||'[]');stored.push(result);localStorage.setItem('quizResults',JSON.stringify(stored));
   fetch(GS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(result)}).catch(function(e){console.warn('GS失敗:',e);});
