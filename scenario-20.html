@@ -518,7 +518,7 @@ function loadFromSheets(){
       sheetsData=(json.data||[]).map(function(row){
         const scenStr=String(row['情境']||''),scenId=(scenStr.match(/情境\s*([\w]+)/)||[])[1]||'';
         const correct=Number(row['答對題數'])||0,total=Number(row['總題數'])||0;
-        return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:String(row['測驗日期']||''),total_questions:total,correct_count:correct,score:total>0?correct/total:0,passed:String(row['是否通過']||'')==='通過'};
+        return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:(function(){var raw=String(row['測驗日期']||'');if(!raw)return '';var d=new Date(raw.replace(' ','T')+'Z');if(isNaN(d))return raw;var t=new Date(d.getTime()+8*3600000);return t.toISOString().slice(0,19).replace('T',' ');})(),total_questions:total,correct_count:correct,score:total>0?correct/total:0,passed:String(row['是否通過']||'')==='通過'};
       });
       const sheetIds=new Set(sheetsData.map(function(r){return String(r.id);}));
       sheetsData=[...sheetsData,...getStoredResults().filter(function(r){return !sheetIds.has(String(r.id));})];

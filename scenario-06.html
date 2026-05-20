@@ -677,7 +677,7 @@ async function loadAdminData(){
     const sheetsData=rows.map(function(row){
       const scenStr=String(row['情境']||''),scenId=(scenStr.match(/情境\s*([\w]+)/)||[])[1]||'';
       const total=Number(row['總題數'])||0,correct=Number(row['答對題數'])||0;
-      return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:String(row['測驗日期']||''),total_questions:total,correct_count:correct,score:total>0?correct/total:0,passed:String(row['是否通過']||'')==='通過'};
+      return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:(function(){var raw=String(row['測驗日期']||'');if(!raw)return '';var d=new Date(raw.replace(' ','T')+'Z');if(isNaN(d))return raw;var t=new Date(d.getTime()+8*3600000);return t.toISOString().slice(0,19).replace('T',' ');})(),total_questions:total,correct_count:correct,score:total>0?correct/total:0,passed:String(row['是否通過']||'')==='通過'};
     });
     sheetsData.sort(function(a,b){return String(b.test_date).localeCompare(String(a.test_date));});
     window._adminData=sheetsData;
