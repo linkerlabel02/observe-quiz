@@ -454,10 +454,12 @@ function checkAllAnswered(){
 }
 function navigate(dir){var next=current+dir;if(next<0||next>=shuffled.length)return;current=next;answered=answers[current]!==null;loadQ(current);}
 function showResults(){
+  var qc=document.getElementById('quizBody').parentNode;
+  if(qc)qc.style.minHeight='480px';
   document.getElementById('quizBody').style.display='none';
   var rs=document.getElementById('resultsScreen');
   rs.style.display='block';
-  rs.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(function(){rs.scrollIntoView({behavior:'auto',block:'nearest'});},100);
   var total=shuffled.length,correct=score;
   var pct=Math.round(correct/total*100);var passed=pct>=90;
   document.getElementById('resIcon').textContent=passed?'🎉':'📊';
