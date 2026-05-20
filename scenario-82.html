@@ -520,15 +520,11 @@ async function loadAdminData(){
         total_questions:total,correct_count:correct,score:total>0?correct/total:0,
         passed:String(row['是否通過']||'')==='通過'};
     });
-    var local=JSON.parse(localStorage.getItem('quizResults')||'[]');
-    var merged=[...sheetsData];
-    local.forEach(function(lr){if(!sheetsData.find(function(sr){return sr.id===String(lr.id);}))merged.push(lr);});
-    allResults=merged.sort(function(a,b){return (b.test_date||'').localeCompare(a.test_date||'');});
+    allResults=sheetsData.sort(function(a,b){return (b.test_date||'').localeCompare(a.test_date||'');});
     filteredResults=allResults.slice();renderTable();
   }catch(err){
-    var local=JSON.parse(localStorage.getItem('quizResults')||'[]');
-    allResults=local.sort(function(a,b){return (b.test_date||'').localeCompare(a.test_date||'');});
-    filteredResults=allResults.slice();renderTable();
+    allResults=[];filteredResults=[];
+    document.getElementById('resultsBody').innerHTML='<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--danger)">⚠️ 無法連線至 Google Sheets，請確認網路連線後重新載入。</td></tr>';
   }
 }
 function applyFilter(){
