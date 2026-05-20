@@ -765,13 +765,6 @@ function exportCSV(){
   var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
   var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='observe_results.csv';a.click();
 }
-  var header=rows[0],data=rows.slice(1);
-  var ws='<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="結果"><Table>';
-  ws+='<Row>'+header.map(function(h){return '<Cell><Data ss:Type="String">'+h+'</Data></Cell>';}).join('')+'</Row>';
-  data.forEach(function(r){ws+='<Row>'+r.map(function(c){return '<Cell><Data ss:Type="String">'+String(c).replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</Data></Cell>';}).join('')+'</Row>';});
-  ws+='</Table></Worksheet></Workbook>';
-  var a=document.createElement('a');a.href='data:application/vnd.ms-excel;charset=utf-8,'+encodeURIComponent(ws);a.download='observe_results.xlsx';a.click();
-}
 </script>
 </body>
 </html>                                                                                                                
