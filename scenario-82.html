@@ -75,7 +75,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 .def-chip.tbc{background:#fff8e1;color:#e65100;border:1px solid #ffe082}
 .def-box{background:#f8f9fa;border-left:3px solid var(--primary);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#3a4a5a;line-height:1.7;margin-top:10px}
 .note-box{background:#fff3cd;border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;color:#856404;line-height:1.6;margin-top:8px}
-.quiz-card{background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:0 1px 6px rgba(0,0,0,.06);overflow:hidden;min-height:200px}
+.quiz-card{background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:0 1px 6px rgba(0,0,0,.06);min-height:200px}
 .quiz-topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);background:#fafbfc}
 .quiz-topbar h2{font-size:15px;font-weight:700}
 .prog-wrap{display:flex;align-items:center;gap:10px}
@@ -446,11 +446,10 @@ function confirmAns(){
 }
 function navigate(dir){var next=current+dir;if(next<0||next>=shuffled.length)return;current=next;answered=answers[current]!==null;loadQ(current);}
 function showResults(){
-  var qb=document.getElementById('quizBody');
-  qb.style.visibility='hidden';qb.style.position='absolute';
+  document.getElementById('quizBody').style.display='none';
   var rs=document.getElementById('resultsScreen');
-  rs.style.display='block';rs.style.visibility='visible';
-  setTimeout(function(){qb.style.display='none';qb.style.visibility='';qb.style.position='';},50);
+  rs.style.display='block';
+  rs.scrollIntoView({behavior:'smooth',block:'center'});
   var total=shuffled.length,correct=score;
   var pct=Math.round(correct/total*100);var passed=pct>=90;
   document.getElementById('resIcon').textContent=passed?'🎉':'📊';
