@@ -713,7 +713,7 @@ async function loadAdminData(){
     const sheetsData=rows.map(function(row){
       var total=parseInt(row['總題數']||0),correct=parseInt(row['答對題數']||0);
       var scenStr=String(row['情境']||'');
-      var scenId=(scenStr.match(/情境\s*(\d+)/)||[])[1]||'';
+      var scenId=(scenStr.match(/情境\s*([\w]+)/)||[])[1]||'';
       return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,
         scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:String(row['測驗日期']||''),
         total_questions:total,correct_count:correct,score:total>0?correct/total:0,

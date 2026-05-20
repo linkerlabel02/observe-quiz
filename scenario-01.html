@@ -511,7 +511,7 @@ function loadFromSheets(){
   fetch('https://script.google.com/macros/s/AKfycbwCI4Aasygn4JFgWuus46mKTyDfw2HAOchVRwlPg2d95t03izvhDlzYUhQxPjUr5EjP/exec',{method:'GET',redirect:'follow'}).then(function(r){return r.json();}).then(function(json){
     if(json.status==='ok'){
       sheetsData=(json.data||[]).map(function(row){
-        const scenStr=String(row['情境']||''),scenId=(scenStr.match(/情境\s*(\d+)/)||[])[1]||'';
+        const scenStr=String(row['情境']||''),scenId=(scenStr.match(/情境\s*([\w]+)/)||[])[1]||'';
         const correct=Number(row['答對題數'])||0,total=Number(row['總題數'])||0;
         return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:String(row['測驗日期']||''),total_questions:total,correct_count:correct,score:total>0?correct/total:0,passed:String(row['是否通過']||'')==='通過'};
       });

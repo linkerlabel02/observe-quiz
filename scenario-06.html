@@ -672,7 +672,7 @@ async function loadAdminData(){
     const json=await resp.json();
     const rows=(json.status==='ok')?(json.data||[]):[];
     const sheetsData=rows.map(function(row){
-      const scenStr=String(row['情境']||''),scenId=(scenStr.match(/情境\s*(\d+)/)||[])[1]||'';
+      const scenStr=String(row['情境']||''),scenId=(scenStr.match(/情境\s*([\w]+)/)||[])[1]||'';
       const total=Number(row['總題數'])||0,correct=Number(row['答對題數'])||0;
       return{id:String(row['id']||Date.now()),name:String(row['姓名']||''),scenario_id:scenId,scenario_name:SCENARIO_NAMES[scenId]||scenId,test_date:String(row['測驗日期']||''),total_questions:total,correct_count:correct,score:total>0?correct/total:0,passed:String(row['是否通過']||'')==='通過'};
     });
