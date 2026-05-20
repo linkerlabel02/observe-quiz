@@ -443,10 +443,10 @@ function toggleSB(){var s=document.getElementById('sidebar'),t=document.getEleme
 function goHome(){sessionStorage.setItem('testerName',testerName);window.location.href='index.html';}
 function goToScenario(id){if(id===SCENARIO_ID){toggleSB();return;}sessionStorage.setItem('testerName',testerName);window.location.href='scenario-'+id+'.html';}
 
-var shuffled=[],answers=[],current=0,score=0,answered=false;
+var shuffled=[],answers=[],current=0,score=0,answered=false,resultsShown=false;
 var zoomScale=1,panX=0,panY=0,isDragging=false,lastX=0,lastY=0;
 function shuffle(arr){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function startQuiz(){shuffled=shuffle(QUIZ_IMGS);answers=new Array(shuffled.length).fill(null);current=0;score=0;answered=false;document.getElementById('startScreen').style.display='none';document.getElementById('quizBody').style.display='flex';loadQ(0);}
+function startQuiz(){shuffled=shuffle(QUIZ_IMGS);answers=new Array(shuffled.length).fill(null);current=0;score=0;answered=false;resultsShown=false;document.getElementById('startScreen').style.display='none';document.getElementById('quizBody').style.display='flex';loadQ(0);}
 function loadQ(idx){
   answered=answers[idx]!==null;
   var img=shuffled[idx];
@@ -466,6 +466,7 @@ function loadQ(idx){
   var done=answers.filter(function(a){return a!==null;}).length;
   document.getElementById('scoreChip').textContent=score+' / '+done;
   document.getElementById('progFill').style.width=(done/shuffled.length*100)+'%';
+  checkAllAnswered();
 }
 function onSelectChange(){var sel=document.getElementById('ansSelect');applySelectStyle(sel);document.getElementById('quBtn').disabled=!sel.value;}
 function applySelectStyle(sel){sel.className='ans-select';if(sel.value==='Confirmed')sel.classList.add('sel-conf');else if(sel.value==='False Alarm')sel.classList.add('sel-fa');else if(sel.value==='To be Confirmed')sel.classList.add('sel-tbc');}
@@ -485,7 +486,14 @@ function confirmAns(){
   var done=answers.filter(function(a){return a!==null;}).length;
   document.getElementById('scoreChip').textContent=score+' / '+done;
   document.getElementById('progFill').style.width=(done/shuffled.length*100)+'%';
-  if(done===shuffled.length){setTimeout(showResults,600);}
+  checkAllAnswered();
+}
+function checkAllAnswered(){
+  if(resultsShown)return;
+  if(answers.length>0 && answers.every(function(a){return a!==null;})){
+    resultsShown=true;
+    setTimeout(showResults,600);
+  }
 }
 function navigate(dir){var next=current+dir;if(next<0||next>=shuffled.length)return;current=next;answered=answers[current]!==null;loadQ(current);}
 function showResults(){
