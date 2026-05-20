@@ -556,15 +556,6 @@ function exportCSV(){
   const from=document.getElementById('fDateFrom').value||'all',to=document.getElementById('fDateTo').value||'all';
   const rows=[['姓名','情境','測驗日期','總題數','答對題數','正確率','是否通過']];
   for(let i=0;i<filteredResults.length;i++){const r=filteredResults[i];rows.push([r.name,'情境'+r.scenario_id+'—'+(SCENARIO_NAMES[r.scenario_id]||''),(r.test_date||'').replace('T',' ').slice(0,16),r.total_questions,r.correct_count,Math.round((r.score||0)*100)+'%',r.passed?'通過':'未通過']);}
-  let csv='';
-  for(let i=0;i<rows.length;i++){csv+=rows[i].map(function(v){return'"'+String(v).replace(/"/g,'""')+'"';}).join(',')+(i<rows.length-1?'\n':'');}
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,﻿'+encodeURIComponent(csv);a.download='observe_results_'+from+'_'+to+'.csv';a.click();
-}
-function exportExcel(){
-  if(!filteredResults.length){alert('無資料可匯出');return;}
-  const from=document.getElementById('fDateFrom').value||'all',to=document.getElementById('fDateTo').value||'all';
-  const rows=[['姓名','情境','測驗日期','總題數','答對題數','正確率','是否通過']];
-  for(let i=0;i<filteredResults.length;i++){const r=filteredResults[i];rows.push([r.name,'情境'+r.scenario_id+'—'+(SCENARIO_NAMES[r.scenario_id]||''),(r.test_date||'').replace('T',' ').slice(0,16),r.total_questions,r.correct_count,Math.round((r.score||0)*100)+'%',r.passed?'通過':'未通過']);}
   let xml='<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="結果"><Table>';
   for(let i=0;i<rows.length;i++){xml+='<Row>';for(let j=0;j<rows[i].length;j++){xml+='<Cell><Data ss:Type="String">'+String(rows[i][j]).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</Data></Cell>';}xml+='</Row>';}
   xml+='</Table></Worksheet></Workbook>';
