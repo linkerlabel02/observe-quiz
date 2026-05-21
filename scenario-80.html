@@ -103,7 +103,7 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
 .img-wrap:active{cursor:grabbing}
 .img-wrap img{max-width:100%;max-height:460px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.15);pointer-events:none;transform-origin:center center;user-select:none;transition:box-shadow .2s}
 .zoom-hint{position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,.45);color:#fff;font-size:10px;padding:3px 8px;border-radius:10px;pointer-events:none}
-.fb-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;margin-top:10px}
+.fb-badge{display:flex;align-items:flex-start;gap:6px;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:600;line-height:1.5;word-break:break-word}
 .fb-badge.correct{background:#e8f5e9;color:#2e7d32;border:1px solid #c8e6c9}
 .fb-badge.wrong{background:#fce4ec;color:#c62828;border:1px solid #ffcdd2}
 .start-screen{padding:32px 28px;text-align:center}
@@ -335,13 +335,13 @@ body{font-family:'Segoe UI',-apple-system,sans-serif;background:var(--bg);color:
         </select>
       </div>
       <button class="qu-btn" id="quBtn" onclick="confirmAns()" disabled>Quick Update ✓</button>
+      <div id="fbBadge" style="margin-top:8px"></div>
     </div>
     <div class="right-panel">
       <div class="img-wrap" id="imgWrap">
         <img id="quizImg" src="" alt="題目圖片">
       </div>
       <div class="zoom-hint">滾輪縮放 · 拖曳平移</div>
-      <div id="fbBadge"></div>
     </div>
   </div>
   <div id="resultsScreen"></div>
